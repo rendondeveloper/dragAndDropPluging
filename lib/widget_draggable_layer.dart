@@ -1,24 +1,37 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 
+///WidgetDraggableLayer Is a widget that allows you to have a floating widget 
+///that can be dragged across the screen
 class WidgetDraggableLayer extends StatefulWidget {
-  final Widget floatingWidget;
-  final Widget content;
-  final bool floatingFullScreen;
-  final bool floatingVisible;
 
+  ///Constructor de WidgetDraggableLayer
   const WidgetDraggableLayer({
-    super.key,
-    required this.floatingWidget,
-    required this.content,
+    super.key,    
     this.floatingFullScreen = false,
     this.floatingVisible = false,
+    this.floatingWidget,
+    this.content,
   });
 
+  ///Widget floating
+  final Widget? floatingWidget;
+
+  ///Content of screen)
+  final Widget? content;
+
+  ///Indicates whether the floating widget takes up the entire screen
+  final bool floatingFullScreen;
+
+  ///Indicates whether the floating widget is visible
+  final bool floatingVisible;
+
   @override
-  createState() => _WidgetDraggableLayer();
+  WidgetDraggableLayerState createState() => WidgetDraggableLayerState();
 }
 
-class _WidgetDraggableLayer extends State<WidgetDraggableLayer> {
+///WidgetDraggableLayerState manages the status of WidgetDraggableLayer
+class WidgetDraggableLayerState extends State<WidgetDraggableLayer> {
   Offset _offset = Offset.zero;
   final Offset _offsetZero = Offset.zero;
 
@@ -57,11 +70,11 @@ class _WidgetDraggableLayer extends State<WidgetDraggableLayer> {
               child: Visibility(
                 visible: widget.floatingVisible,
                 child: AnimatedContainer(
-                    duration: const Duration(milliseconds: 300),
-                    height:
-                        widget.floatingFullScreen ? screenSize.height : null,
-                    width: widget.floatingFullScreen ? screenSize.width : null,
-                    child: widget.floatingWidget),
+                  duration: const Duration(milliseconds: 300),
+                  height: widget.floatingFullScreen ? screenSize.height : null,
+                  width: widget.floatingFullScreen ? screenSize.width : null,
+                  child: widget.floatingWidget,
+                ),
               ),
             ),
           ),

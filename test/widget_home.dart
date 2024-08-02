@@ -9,7 +9,8 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  bool isVisibleButton = false, isFullScreen = false;
+  bool isVisibleButton = false;
+  bool isFullScreen = false;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -18,10 +19,11 @@ class _HomePageState extends State<HomePage> {
         mainAxisSize: MainAxisSize.min,
         children: [
           FloatingActionButton(
-            heroTag: "showWidget",
+            heroTag: 'showWidget',
             child: Icon(isVisibleButton
                 ? Icons.refresh
-                : Icons.remove_from_queue_sharp),
+                : Icons.remove_from_queue_sharp,
+            ),
             onPressed: () {
               setState(() {
                 isVisibleButton = !isVisibleButton;
@@ -29,7 +31,7 @@ class _HomePageState extends State<HomePage> {
             },
           ),
           FloatingActionButton(
-            heroTag: "showFullScreen",
+            heroTag: 'showFullScreen',
             child: const Icon(Icons.fullscreen),
             onPressed: () {
               setState(() {
@@ -40,27 +42,27 @@ class _HomePageState extends State<HomePage> {
         ],
       ),
       appBar: AppBar(
-        title: const Text("Hello"),
+        title: const Text('Hello'),
       ),
       body: WidgetDraggableLayer(
         floatingFullScreen: isFullScreen,
         floatingVisible: isVisibleButton,
-        floatingWidget: Container(
+        floatingWidget: ColoredBox(
           color: Colors.red,
           child: Padding(
-            padding: const EdgeInsets.all(16.0),
+            padding: const EdgeInsets.all(16),
             child: Column(
               children: [
                 ElevatedButton(
                   onPressed: () {},
-                  child: const Text("Button Uno"),
+                  child: const Text('Button Uno'),
                 ),
                 const SizedBox(
                   height: 16,
                 ),
                 ElevatedButton(
                   onPressed: () {},
-                  child: const Text("Button dos"),
+                  child: const Text('Button dos'),
                 ),
               ],
             ),

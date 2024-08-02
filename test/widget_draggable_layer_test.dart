@@ -4,8 +4,8 @@ import 'package:flutter_test/flutter_test.dart';
 import 'widget_home.dart';
 
 void main() {
-  group("Test widget main", () {
-    testWidgets("testing show button", (tester) async {
+  group('Test widget main', () {
+    testWidgets('testing show button', (tester) async {
       await tester.pumpWidget(
         const MaterialApp(
           home: HomePage(),
@@ -14,21 +14,22 @@ void main() {
 
       final widget = find.byElementPredicate((predicate) {
         return predicate.widget is FloatingActionButton &&
-            (predicate.widget as FloatingActionButton).heroTag == "showWidget";
+            (predicate.widget as FloatingActionButton).heroTag == 'showWidget';
       });
 
       expect(widget, findsOne);
 
       await tester.tap(find.byWidget(
         widget.found.single.widget,
-      ));
+        ),
+      );
 
       await tester.pumpAndSettle();
 
       expect(find.byType(ElevatedButton), findsWidgets);
     });
 
-    testWidgets("testing show button and hidden button", (tester) async {
+    testWidgets('testing show button and hidden button', (tester) async {
       await tester.pumpWidget(
         const MaterialApp(
           home: HomePage(),
@@ -37,14 +38,15 @@ void main() {
 
       final widget = find.byElementPredicate((predicate) {
         return predicate.widget is FloatingActionButton &&
-            (predicate.widget as FloatingActionButton).heroTag == "showWidget";
+            (predicate.widget as FloatingActionButton).heroTag == 'showWidget';
       });
 
       expect(widget, findsOne);
 
       await tester.tap(find.byWidget(
         widget.found.single.widget,
-      ));
+        ),
+      );
 
       await tester.pumpAndSettle();
 
@@ -52,14 +54,15 @@ void main() {
 
       await tester.tap(find.byWidget(
         widget.found.single.widget,
-      ));
+        ),
+      );
 
       await tester.pumpAndSettle();
 
       expect(find.byType(ElevatedButton), findsNothing);
     });
 
-    testWidgets("testing show button and move", (tester) async {
+    testWidgets('testing show button and move', (tester) async {
       await tester.pumpWidget(
         const MaterialApp(
           home: HomePage(),
@@ -68,14 +71,15 @@ void main() {
 
       final widget = find.byElementPredicate((predicate) {
         return predicate.widget is FloatingActionButton &&
-            (predicate.widget as FloatingActionButton).heroTag == "showWidget";
+            (predicate.widget as FloatingActionButton).heroTag == 'showWidget';
       });
 
       expect(widget, findsOne);
 
       await tester.tap(find.byWidget(
         widget.found.single.widget,
-      ));
+        ),
+      );
 
       await tester.pumpAndSettle();
 
@@ -93,7 +97,7 @@ void main() {
       await tester.pumpAndSettle();
     });
 
-    testWidgets("testing show full screen", (tester) async {
+    testWidgets('testing show full screen', (tester) async {
       await tester.pumpWidget(
         const MaterialApp(
           home: HomePage(),
@@ -102,28 +106,30 @@ void main() {
 
       final widgetShow = find.byElementPredicate((predicate) {
         return predicate.widget is FloatingActionButton &&
-            (predicate.widget as FloatingActionButton).heroTag == "showWidget";
+            (predicate.widget as FloatingActionButton).heroTag == 'showWidget';
       });
 
       expect(widgetShow, findsOne);
 
       await tester.tap(find.byWidget(
         widgetShow.found.single.widget,
-      ));
+        ),
+      );
 
       await tester.pumpAndSettle();
 
       final widgetFullScreen = find.byElementPredicate((predicate) {
         return predicate.widget is FloatingActionButton &&
             (predicate.widget as FloatingActionButton).heroTag ==
-                "showFullScreen";
+                'showFullScreen';
       });
 
       expect(widgetFullScreen, findsOne);
 
       await tester.tap(find.byWidget(
         widgetFullScreen.found.single.widget,
-      ));
+        ),
+      );
 
       await tester.pumpAndSettle();
     });
