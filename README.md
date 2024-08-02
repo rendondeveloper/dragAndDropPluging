@@ -1,39 +1,69 @@
-<!--
-This README describes the package. If you publish this package to pub.dev,
-this README's contents appear on the landing page for your package.
-
-For information about how to write a good package README, see the guide for
-[writing package pages](https://dart.dev/guides/libraries/writing-package-pages).
-
-For general information about developing packages, see the Dart guide for
-[creating packages](https://dart.dev/guides/libraries/create-library-packages)
-and the Flutter guide for
-[developing packages and plugins](https://flutter.dev/developing-packages).
--->
-
-TODO: Put a short description of the package here that helps potential users
-know whether this package might be useful for them.
+Creating package to show floating widget and allow see in full screen the same widget.
 
 ## Features
 
-TODO: List what your package can do. Maybe include images, gifs, or videos.
+Example the project
+
+<img src="https://github.com/user-attachments/assets/08e08a9d-1b38-4a50-86f6-bfad3b82d555" width="300"/>
 
 ## Getting started
 
-TODO: List prerequisites and provide or point to information on how to
-start using the package.
+You need add :  ```drag_and_drop_pluging: ^0.0.1```
 
 ## Usage
 
-TODO: Include short and useful examples for package users. Add longer examples
-to `/example` folder.
+Example of implementation
 
 ```dart
-const like = 'sample';
+Scaffold(
+      backgroundColor: Colors.white,
+      floatingActionButton: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          FloatingActionButton(
+            heroTag: "showWidget",
+            child: Icon(isVisibleButton
+                ? Icons.visibility_off
+                : Icons.visibility),
+            onPressed: () {
+              setState(() {
+                isVisibleButton = !isVisibleButton;
+              });
+            },
+          ),
+        ],
+      ),
+      appBar: AppBar(
+        title: const Text("Example"),
+      ),
+      body: WidgetDraggableLayer(
+        floatingFullScreen: isFullScreen,
+        floatingVisible: isVisibleButton,
+        floatingWidget: Container(
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(isFullScreen ? 0 : 16),
+            color: Colors.red.shade200,
+          ),
+          child: Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: Column(
+              children: [
+                ElevatedButton(
+                  onPressed: () {
+                         setState(() {
+                      isFullScreen = !isFullScreen;
+                    });
+                  },
+                  child: const Text("Button Uno"),
+                ),
+              ],
+            ),
+          ),
+        ),
+        content: Container(),
+      ),
+    );
 ```
 
 ## Additional information
-
-TODO: Tell users more about the package: where to find more information, how to
-contribute to the package, how to file issues, what response they can expect
-from the package authors, and more.
+You can find all code in this [repository](https://github.com/rendondeveloper/dragAndDropPluging).
