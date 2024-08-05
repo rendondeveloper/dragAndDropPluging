@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 
-///WidgetDraggableLayer Is a widget that allows you to have a floating widget 
+///DragAndDropLayer Is a widget that allows you to have a floating widget 
 ///that can be dragged across the screen
-class WidgetDraggableLayer extends StatefulWidget {
+class DragAndDropLayer extends StatefulWidget {
 
-  ///Constructor de WidgetDraggableLayer
-  const WidgetDraggableLayer({
+  ///Constructor de DragAndDropLayer
+  const DragAndDropLayer({
     super.key,    
     this.floatingFullScreen = false,
     this.floatingVisible = false,
@@ -30,8 +30,8 @@ class WidgetDraggableLayer extends StatefulWidget {
   WidgetDraggableLayerState createState() => WidgetDraggableLayerState();
 }
 
-///WidgetDraggableLayerState manages the status of WidgetDraggableLayer
-class WidgetDraggableLayerState extends State<WidgetDraggableLayer> {
+///WidgetDraggableLayerState manages the status of DragAndDropLayer
+class WidgetDraggableLayerState extends State<DragAndDropLayer> {
   Offset _offset = Offset.zero;
   final Offset _offsetZero = Offset.zero;
 

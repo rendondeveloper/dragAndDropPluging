@@ -1,4 +1,5 @@
-import 'package:drag_and_drop_pluging/widget_draggable_layer.dart';
+import 'package:drag_and_drop_layer/drag_and_drop_layer.dart';
+
 import 'package:flutter/material.dart';
 
 class HomePage extends StatefulWidget {
@@ -44,7 +45,7 @@ class _HomePageState extends State<HomePage> {
       appBar: AppBar(
         title: const Text('Hello'),
       ),
-      body: WidgetDraggableLayer(
+      body: DragAndDropLayer(
         floatingFullScreen: isFullScreen,
         floatingVisible: isVisibleButton,
         floatingWidget: ColoredBox(
