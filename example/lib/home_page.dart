@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:widget_drag_and_drop_layer/widget_drag_and_drop_layer.dart';
 
@@ -10,8 +9,7 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  bool isVisibleButton = false;
-  bool isFullScreen = false;
+  bool isVisibleButton = false, isFullScreen = false;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -20,50 +18,39 @@ class _HomePageState extends State<HomePage> {
         mainAxisSize: MainAxisSize.min,
         children: [
           FloatingActionButton(
-            heroTag: 'showWidget',
-            child: Icon(isVisibleButton
-                ? Icons.refresh
-                : Icons.remove_from_queue_sharp,
-            ),
+            heroTag: "showWidget",
+            child:
+                Icon(isVisibleButton ? Icons.visibility_off : Icons.visibility),
             onPressed: () {
               setState(() {
                 isVisibleButton = !isVisibleButton;
               });
             },
           ),
-          FloatingActionButton(
-            heroTag: 'showFullScreen',
-            child: const Icon(Icons.fullscreen),
-            onPressed: () {
-              setState(() {
-                isFullScreen = !isFullScreen;
-              });
-            },
-          ),
         ],
       ),
       appBar: AppBar(
-        title: const Text('Hello'),
+        title: const Text("Hello"),
       ),
       body: WidgetDragAndDropLayer(
         floatingFullScreen: isFullScreen,
         floatingVisible: isVisibleButton,
-        floatingWidget: ColoredBox(
-          color: Colors.red,
+        floatingWidget: Container(
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(isFullScreen ? 0 : 16),
+            color: Colors.red.shade200,
+          ),
           child: Padding(
-            padding: const EdgeInsets.all(16),
+            padding: const EdgeInsets.all(16.0),
             child: Column(
               children: [
                 ElevatedButton(
-                  onPressed: () {},
-                  child: const Text('Button Uno'),
-                ),
-                const SizedBox(
-                  height: 16,
-                ),
-                ElevatedButton(
-                  onPressed: () {},
-                  child: const Text('Button dos'),
+                  onPressed: () {
+                    setState(() {
+                      isFullScreen = !isFullScreen;
+                    });
+                  },
+                  child: const Text("Button Uno"),
                 ),
               ],
             ),
