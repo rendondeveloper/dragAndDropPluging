@@ -1,42 +1,25 @@
-Creating package to show floating widget and allow see in full screen the same widget.
 
-## Features
+<h1 class="hash-header">Widget Drag And Drop Layer</h1>
+</br>
+<p>Allow show y/o hidden a widget floating over the screen also expand this widget in fullscreen.</p>
 
-Example the project
 
+<p>Get Starting</p>
+<pre>
+<code class="language-xml hljs" data-highlighted="yes" >          
+drag_and_drop_pluging: ^0.0.1
+</code>
+</pre>
+
+</br>
+<p>Example</p>
 <img src="https://github.com/user-attachments/assets/08e08a9d-1b38-4a50-86f6-bfad3b82d555" width="300"/>
 
-## Getting started
 
-You need add :  ```drag_and_drop_pluging: ^0.0.1```
-
-## Usage
-
-Example of implementation
-
-```dart
-Scaffold(
-      backgroundColor: Colors.white,
-      floatingActionButton: Column(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          FloatingActionButton(
-            heroTag: "showWidget",
-            child: Icon(isVisibleButton
-                ? Icons.visibility_off
-                : Icons.visibility),
-            onPressed: () {
-              setState(() {
-                isVisibleButton = !isVisibleButton;
-              });
-            },
-          ),
-        ],
-      ),
-      appBar: AppBar(
-        title: const Text("Example"),
-      ),
-      body: WidgetDraggableLayer(
+<p>Example code</p>
+<pre>
+<code class="language-xml hljs" data-highlighted="yes" >    
+WidgetDraggableLayer(
         floatingFullScreen: isFullScreen,
         floatingVisible: isVisibleButton,
         floatingWidget: Container(
@@ -61,9 +44,13 @@ Scaffold(
           ),
         ),
         content: Container(),
-      ),
-    );
-```
+      )
+</code>
+</pre>
 
-## Additional information
-You can find all code in this [repository](https://github.com/rendondeveloper/dragAndDropPluging).
+<p>Properties</p>
+<lis>
+      <li>floatingFullScreen : Expand or containt the widget fullscreen</li>
+      <li>floatingVisible : Show or hidden widget</li>
+      <li>floatingWidget : Floating widget</li>      
+</lis>
