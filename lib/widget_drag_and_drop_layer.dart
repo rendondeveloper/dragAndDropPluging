@@ -1,30 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:widget_drag_and_drop_layer/props/widget_drag_and_drop_layer_props.dart';
 
-///WidgetDragAndDropLayer Is a widget that allows you to have a floating widget 
+///WidgetDragAndDropLayer Is a widget that allows you to have a floating widget
 ///that can be dragged across the screen
 class WidgetDragAndDropLayer extends StatefulWidget {
-
   ///Constructor de WidgetDragAndDropLayer
-  const WidgetDragAndDropLayer({
-    super.key,    
-    this.floatingFullScreen = false,
-    this.floatingVisible = false,
-    this.floatingWidget,
-    this.content,
-  });
+  const WidgetDragAndDropLayer({super.key, this.props});
 
-  ///Widget floating
-  final Widget? floatingWidget;
-
-  ///Content of screen)
-  final Widget? content;
-
-  ///Indicates whether the floating widget takes up the entire screen
-  final bool floatingFullScreen;
-
-  ///Indicates whether the floating widget is visible
-  final bool floatingVisible;
+  ///WidgetDragAndDropLayerProps
+  final WidgetDragAndDropLayerProps? props;
 
   @override
   WidgetDraggableLayerState createState() => WidgetDraggableLayerState();
@@ -38,8 +23,13 @@ class WidgetDraggableLayerState extends State<WidgetDragAndDropLayer> {
   @override
   Widget build(BuildContext context) {
     final screenSize = MediaQuery.of(context).size;
-
-    return SizedBox(
+    final widgetData = widget.props;
+    return widgetData == null
+        ? SizedBox(
+            height: screenSize.height,
+            width: screenSize.width,
+          )
+        : SizedBox(
       height: screenSize.height,
       width: screenSize.width,
       child: Stack(
@@ -48,16 +38,19 @@ class WidgetDraggableLayerState extends State<WidgetDragAndDropLayer> {
           Positioned.fill(
             child: GestureDetector(
               behavior: HitTestBehavior.deferToChild,
-              child: widget
-                  .content, // Vacío para que detecte gestos en toda la pantalla
+                    child: widgetData.content ?? Container(),
             ),
           ),
           // Widget flotante
           Positioned(
-            left: widget.floatingFullScreen ? _offsetZero.dx : _offset.dx,
-            top: widget.floatingFullScreen ? _offsetZero.dy : _offset.dy,
+                  left: widgetData.floatingFullScreen
+                      ? _offsetZero.dx
+                      : _offset.dx,
+                  top: widgetData.floatingFullScreen
+                      ? _offsetZero.dy
+                      : _offset.dy,
             child: GestureDetector(
-              onPanUpdate: widget.floatingFullScreen
+                    onPanUpdate: widgetData.floatingFullScreen
                   ? null
                   : (details) {
                       setState(() {
@@ -68,12 +61,16 @@ class WidgetDraggableLayerState extends State<WidgetDragAndDropLayer> {
                       });
                     },
               child: Visibility(
-                visible: widget.floatingVisible,
+                      visible: widgetData.floatingVisible,
                 child: AnimatedContainer(
                   duration: const Duration(milliseconds: 300),
-                  height: widget.floatingFullScreen ? screenSize.height : null,
-                  width: widget.floatingFullScreen ? screenSize.width : null,
-                  child: widget.floatingWidget,
+                        height: widgetData.floatingFullScreen
+                            ? screenSize.height
+                            : null,
+                        width: widgetData.floatingFullScreen
+                            ? screenSize.width
+                            : null,
+                        child: widgetData.floatingWidget,
                 ),
               ),
             ),
