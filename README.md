@@ -1,4 +1,6 @@
 
+[![style: very good analysis](https://img.shields.io/badge/style-very_good_analysis-B22C89.svg)](https://pub.dev/packages/very_good_analysis)
+
 <h1 class="hash-header">Widget Drag And Drop Layer</h1>
 </br>
 <p>Allow show y/o hidden a widget floating over the screen also expand this widget in fullscreen.</p>
