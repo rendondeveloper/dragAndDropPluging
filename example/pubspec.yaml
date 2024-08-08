@@ -11,11 +11,11 @@ dependencies:
     sdk: flutter
 
   cupertino_icons: ^1.0.6
-
-
+  
   widget_drag_and_drop_layer:
-    path: ../../widget_drag_and_drop_layer
-
+    git:
+      url: https://github.com/rendondeveloper/dragAndDropPluging.git
+      ref: main
 
 dev_dependencies:
   flutter_test:

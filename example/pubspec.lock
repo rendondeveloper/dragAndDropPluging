@@ -219,10 +219,12 @@ packages:
   widget_drag_and_drop_layer:
     dependency: "direct main"
     description:
-      path: ".."
-      relative: true
-    source: path
-    version: "0.0.1"
+      path: "."
+      ref: main
+      resolved-ref: aaa380d3db9c72a6927b06baf9c762c2cd714adf
+      url: "https://github.com/rendondeveloper/dragAndDropPluging.git"
+    source: git
+    version: "0.0.3"
 sdks:
   dart: ">=3.4.3 <4.0.0"
   flutter: ">=3.18.0-18.0.pre.54"
