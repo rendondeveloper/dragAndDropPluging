@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:widget_drag_and_drop_layer/props/widget_drag_and_drop_layer_props.dart';
 import 'package:widget_drag_and_drop_layer/widget_drag_and_drop_layer.dart';
 
 class HomePage extends StatefulWidget {
@@ -33,30 +34,32 @@ class _HomePageState extends State<HomePage> {
         title: const Text("Hello"),
       ),
       body: WidgetDragAndDropLayer(
-        floatingFullScreen: isFullScreen,
-        floatingVisible: isVisibleButton,
-        floatingWidget: Container(
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(isFullScreen ? 0 : 16),
-            color: Colors.red.shade200,
-          ),
-          child: Padding(
-            padding: const EdgeInsets.all(16.0),
-            child: Column(
-              children: [
-                ElevatedButton(
-                  onPressed: () {
-                    setState(() {
-                      isFullScreen = !isFullScreen;
-                    });
-                  },
-                  child: const Text("Button Uno"),
-                ),
-              ],
+        props: WidgetDragAndDropLayerProps(
+          floatingWidget: Container(
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(isFullScreen ? 0 : 16),
+              color: Colors.red.shade200,
+            ),
+            child: Padding(
+              padding: const EdgeInsets.all(16.0),
+              child: Column(
+                children: [
+                  ElevatedButton(
+                    onPressed: () {
+                      setState(() {
+                        isFullScreen = !isFullScreen;
+                      });
+                    },
+                    child: const Text("Button Uno"),
+                  ),
+                ],
+              ),
             ),
           ),
-        ),
-        content: Container(),
+          content: Container(),
+          floatingFullScreen: isFullScreen,
+          floatingVisible: isVisibleButton,
+        ),       
       ),
     );
   }

@@ -1,137 +1,105 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-
-import 'widget_home.dart';
+import 'package:widget_drag_and_drop_layer/props/widget_drag_and_drop_layer_props.dart';
+import 'package:widget_drag_and_drop_layer/widget_drag_and_drop_layer.dart';
 
 void main() {
-  group('Test widget main', () {
-    testWidgets('testing show button', (tester) async {
-      await tester.pumpWidget(
-        const MaterialApp(
-          home: HomePage(),
+  testWidgets('Floating widget should be visible when floatingVisible is true',
+      (WidgetTester tester) async {
+    // Arrange
+    final props = WidgetDragAndDropLayerProps(
+      floatingWidget: Container(key: const Key('floatingWidget')),
+      content: Container(),
+      floatingFullScreen: false,
+      floatingVisible: true,
+    );
+
+    // Act
+    await tester.pumpWidget(
+      MaterialApp(
+        home: WidgetDragAndDropLayer(props: props),
+      ),
+    );
+
+    // Assert
+    expect(find.byKey(const Key('floatingWidget')), findsOneWidget);
+  });
+
+  testWidgets('Floating widget should be draggable',
+      (WidgetTester tester) async {
+    // Arrange
+    final props = WidgetDragAndDropLayerProps(
+      floatingWidget: Container(
+        key: const Key('floatingWidget'),
+        width: 50,
+        height: 50,
+        color: Colors.red,
+      ),
+      content: Container(),
+      floatingFullScreen: false,
+      floatingVisible: true,
+    );
+
+    // Act
+    await tester.pumpWidget(
+      MaterialApp(
+        home: WidgetDragAndDropLayer(props: props),
+      ),
+    );
+
+    final initialOffset =
+        tester.getCenter(find.byKey(const Key('floatingWidget')));
+
+    // Drag the floating widget
+    await tester.drag(
+      find.byKey(const Key('floatingWidget')),
+      const Offset(100, 100),
+    );
+    await tester.pumpAndSettle();
+
+    final newOffset = tester.getCenter(
+      find.byKey(
+        const Key('floatingWidget'),
+      ),
+    );
+
+    // Assert
+    expect(newOffset.dx, greaterThan(initialOffset.dx));
+    expect(newOffset.dy, greaterThan(initialOffset.dy));
+  });
+
+  testWidgets(
+      'Floating widget should take full screen when floatingFullScreen is true',
+      (WidgetTester tester) async {
+    // Arrange
+    const screenSize = Size(800, 600);
+    final props = WidgetDragAndDropLayerProps(
+      floatingWidget:
+          Container(key: const Key('floatingWidget'), color: Colors.red),
+      content: Container(),
+      floatingFullScreen: true,
+      floatingVisible: true,
+    );
+
+    // Act
+    await tester.pumpWidget(
+      MaterialApp(
+        home: SizedBox(
+          width: screenSize.width,
+          height: screenSize.height,
+          child: WidgetDragAndDropLayer(props: props),
         ),
-      );
+      ),
+    );
+    await tester.pumpAndSettle();
 
-      final widget = find.byElementPredicate((predicate) {
-        return predicate.widget is FloatingActionButton &&
-            (predicate.widget as FloatingActionButton).heroTag == 'showWidget';
-      });
-
-      expect(widget, findsOne);
-
-      await tester.tap(find.byWidget(
-        widget.found.single.widget,
-        ),
-      );
-
-      await tester.pumpAndSettle();
-
-      expect(find.byType(ElevatedButton), findsWidgets);
-    });
-
-    testWidgets('testing show button and hidden button', (tester) async {
-      await tester.pumpWidget(
-        const MaterialApp(
-          home: HomePage(),
-        ),
-      );
-
-      final widget = find.byElementPredicate((predicate) {
-        return predicate.widget is FloatingActionButton &&
-            (predicate.widget as FloatingActionButton).heroTag == 'showWidget';
-      });
-
-      expect(widget, findsOne);
-
-      await tester.tap(find.byWidget(
-        widget.found.single.widget,
-        ),
-      );
-
-      await tester.pumpAndSettle();
-
-      expect(find.byType(ElevatedButton), findsWidgets);
-
-      await tester.tap(find.byWidget(
-        widget.found.single.widget,
-        ),
-      );
-
-      await tester.pumpAndSettle();
-
-      expect(find.byType(ElevatedButton), findsNothing);
-    });
-
-    testWidgets('testing show button and move', (tester) async {
-      await tester.pumpWidget(
-        const MaterialApp(
-          home: HomePage(),
-        ),
-      );
-
-      final widget = find.byElementPredicate((predicate) {
-        return predicate.widget is FloatingActionButton &&
-            (predicate.widget as FloatingActionButton).heroTag == 'showWidget';
-      });
-
-      expect(widget, findsOne);
-
-      await tester.tap(find.byWidget(
-        widget.found.single.widget,
-        ),
-      );
-
-      await tester.pumpAndSettle();
-
-      final widgetsElevation = find.byType(ElevatedButton);
-
-      expect(widgetsElevation, findsWidgets);
-
-      await tester.drag(
-        find.byWidget(
-          widgetsElevation.found.first.widget,
-        ),
-        const Offset(500, 500),
-      );
-
-      await tester.pumpAndSettle();
-    });
-
-    testWidgets('testing show full screen', (tester) async {
-      await tester.pumpWidget(
-        const MaterialApp(
-          home: HomePage(),
-        ),
-      );
-
-      final widgetShow = find.byElementPredicate((predicate) {
-        return predicate.widget is FloatingActionButton &&
-            (predicate.widget as FloatingActionButton).heroTag == 'showWidget';
-      });
-
-      expect(widgetShow, findsOne);
-
-      await tester.tap(find.byWidget(
-        widgetShow.found.single.widget,
-        ),
-      );
-
-      await tester.pumpAndSettle();
-
-      final widgetFullScreen = find.byElementPredicate((predicate) {
-        return predicate.widget is FloatingActionButton &&
-            (predicate.widget as FloatingActionButton).heroTag ==
-                'showFullScreen';
-      });
-
-      expect(widgetFullScreen, findsOne);
-
-      await tester.tap(find.byWidget(
-        widgetFullScreen.found.single.widget,
-        ),
-      );
-
-      await tester.pumpAndSettle();
-    });
+    // Assert
+    final floatingWidgetSize = tester.getSize(
+      find.byKey(
+        const Key('floatingWidget'),
+      ),
+    );
+    expect(floatingWidgetSize.width, screenSize.width);
+    expect(floatingWidgetSize.height, screenSize.height);
   });
 }
