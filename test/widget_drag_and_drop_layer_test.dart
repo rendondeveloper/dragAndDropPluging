@@ -102,4 +102,27 @@ void main() {
     expect(floatingWidgetSize.width, screenSize.width);
     expect(floatingWidgetSize.height, screenSize.height);
   });
+  
+  testWidgets('when send only the prop only show size box invisible',
+      (WidgetTester tester) async {
+    // Act
+    await tester.pumpWidget(
+      const MaterialApp(
+        home: WidgetDragAndDropLayer(),
+      ),
+    );
+    await tester.pumpAndSettle();
+
+    // Assert
+    final widget = find.byType(
+      SizedBox,
+    );
+
+    final stackWidget = find.byType(
+      Stack,
+    );
+
+    expect(widget, findsOneWidget);
+    expect(stackWidget, findsNothing);
+  });
 }
