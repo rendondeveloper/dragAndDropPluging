@@ -4,15 +4,15 @@ LF:1
 LH:1
 end_of_record
 SF:lib/widget_drag_and_drop_layer.dart
-DA:9,1
+DA:9,2
 DA:14,1
 DA:15,1
 DA:23,1
 DA:25,2
 DA:26,2
-DA:28,0
-DA:29,0
-DA:30,0
+DA:28,1
+DA:29,1
+DA:30,1
 DA:32,1
 DA:33,1
 DA:34,1
@@ -44,5 +44,5 @@ DA:70,1
 DA:71,1
 DA:73,1
 LF:39
-LH:36
+LH:39
 end_of_record

@@ -10,6 +10,10 @@
 
 * Change the way parameters are sent to the widget and adjust the testing layer.
 
-## 0.0.3
+## 0.0.4
 
 * Add analytics testing to the project.
+
+## 0.0.5
+
+* Add a new report for unit test coverage.
