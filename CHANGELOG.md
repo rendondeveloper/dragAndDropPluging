@@ -17,3 +17,7 @@
 ## 0.0.5
 
 * Add a new report for unit test coverage.
+
+## 0.0.6
+
+* Add automatization deploy.

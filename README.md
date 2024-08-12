@@ -12,7 +12,7 @@
 <p>Get Starting</p>
 <pre>
 <code class="language-xml hljs" data-highlighted="yes" >          
-drag_and_drop_pluging: ^0.0.5
+drag_and_drop_pluging: ^0.0.6
 </code>
 </pre>
 
