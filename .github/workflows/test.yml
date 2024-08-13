@@ -6,14 +6,12 @@ on:
   pull_request:
     branches: [main]
 
-jobs:
-  publish:
-   permissions:
-    id-token: write # Required for authentication using OIDC
-   runs-on: ubuntu-latest
-    
+jobs:    
   tests:
     runs-on: ubuntu-latest
+
+    permissions:
+      id-token: write # Required for authentication using OIDC
 
     steps:
       - name: Checkout the code
