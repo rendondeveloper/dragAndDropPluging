@@ -2,8 +2,7 @@ name: Flutter_Tests
 
 on:
   push:
-    tags:
-      - 'v*.*.*'
+    branches: [main]
   pull_request:
     branches: [main]
 
