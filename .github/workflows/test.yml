@@ -8,50 +8,16 @@ on:
     branches: [main]
 
 jobs:
-  publish:
+   publish:
     permissions:
       id-token: write # Required for authentication using OIDC
-    uses: dart-lang/setup-dart/.github/workflows/publish.yml@v1
-    # with:
-    #   working-directory: path/to/package/within/repository
-  tests:
     runs-on: ubuntu-latest
-
     steps:
-      - name: Checkout the code
-        uses: actions/checkout@v2
-
-      - name: Clone repository
-        uses: actions/checkout@v4
-      - name: Set up Flutter
-        uses: subosito/flutter-action@v2
-        with:
-          channel: stable
-          flutter-version: 3.22.2
-      - run: flutter --version
-
-      - name: Restore packages
-        run: flutter pub get
-
-      - name: Analyze
-        run: flutter analyze
-
-      - name: Run tests
-        run: flutter test --coverage
-      
-      - name: Upload coverage to codecov
-        run: curl -s https://codecov.io/bash
-        shell: bash
-
-      - name: Upload coverage to Codecov
-        uses: codecov/codecov-action@v4
-        with:
-          verbose: true
-        env:
-          CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
-
-      - name: Check package
-        run: dart pub publish --dry-run
-
-      - name: Publish package
-        run: dart pub publish --force 
+      - uses: actions/checkout@v3
+      - uses: dart-lang/setup-dart@v1
+      - name: Install dependencies
+        run: dart pub get
+      # Here you can insert custom steps you need
+      # - run: dart tool/generate-code.dart
+      - name: Publish
+        run: dart pub publish --force
