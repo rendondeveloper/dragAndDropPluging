@@ -2,7 +2,8 @@ name: Flutter_Tests
 
 on:
   push:
-    branches: [main]
+    tags:
+      - 'v*.*.*'
   pull_request:
     branches: [main]
 
@@ -30,6 +31,23 @@ jobs:
 
       - name: Restore packages
         run: flutter pub get
+
+      - name: Analyze
+        run: flutter analyze
+
+      - name: Run tests
+        run: flutter test --coverage
+      
+      - name: Upload coverage to codecov
+        run: curl -s https://codecov.io/bash
+        shell: bash
+
+      - name: Upload coverage to Codecov
+        uses: codecov/codecov-action@v4
+        with:
+          verbose: true
+        env:
+          CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}      
 
       - name: Check package
         run: dart pub publish --dry-run
