@@ -10,23 +10,24 @@ jobs:
     permissions:
       id-token: write # Required for authentication using OIDC
     runs-on: ubuntu-latest
-  tests:
-      runs-on: ubuntu-latest
-      steps:
-        - name: Checkout the code
-          uses: actions/checkout@v3
+    steps:
+      - name: Checkout the code
+        uses: actions/checkout@v2
 
-        - name: Clone repository
-          uses: actions/checkout@v4
-        - name: Set up Flutter
-          uses: subosito/flutter-action@v2
-          with:
-            channel: stable
-            flutter-version: 3.22.2
-        - run: flutter --version
+      - name: Clone repository
+        uses: actions/checkout@v4
 
-        - name: Restore packages
-          run: flutter pub get     
+      - name: Set up Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          channel: stable
+          flutter-version: 3.22.2
+      
+      - name: Chech Version Flutter    
+        run: flutter --version
 
-        - name: Publish package
-          run: dart pub publish --force
+      - name: Restore packages
+        run: flutter pub get     
+
+      - name: Publish package
+        run: dart pub publish --force
