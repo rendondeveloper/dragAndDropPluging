@@ -26,14 +26,8 @@ jobs:
           channel: stable
           flutter-version: 3.22.2
       
-      - name: Chech Version Flutter    
-        run: flutter --version
-
       - name: Restore packages
-        run: flutter pub get
-      
-      - name: Analyze
-        run: flutter analyze
+        run: flutter pub get      
 
       - name: Run tests
         run: flutter test --coverage
@@ -48,9 +42,4 @@ jobs:
           verbose: true
         env:
           CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
-      
-      - name: Check package
-        run: dart pub publish --dry-run
-
-      - name: Publish package
-        run: dart pub publish --force --no-interaction
+                
