@@ -8,10 +8,7 @@ on:
 jobs:
   publish:
     permissions:
-      id-token: write # Required for authentication using OIDC
-      issues: write
-      pull-requests: write
-      contents: read
+      id-token: write # Required for authentication using OIDC   
     runs-on: ubuntu-latest
     steps:
       - name: Checkout the code
@@ -42,4 +39,3 @@ jobs:
           verbose: true
         env:
           CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
-                
