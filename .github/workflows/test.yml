@@ -9,6 +9,9 @@ jobs:
   publish:
     permissions:
       id-token: write # Required for authentication using OIDC
+      issues: write
+      pull-requests: write
+      contents: read
     runs-on: ubuntu-latest
     steps:
       - name: Checkout the code
@@ -27,7 +30,30 @@ jobs:
         run: flutter --version
 
       - name: Restore packages
-        run: flutter pub get     
+        run: flutter pub get
+      
+      - name: Analyze
+        run: flutter analyze
+
+      - name: Run tests
+        run: flutter test --coverage
+
+      - name: Create report
+        run: genhtml coverage/lcov.info -o coverage/html
+      
+      - name: Upload coverage to codecov
+        run: curl -s https://codecov.io/bash
+        shell: bash
+
+      - name: Upload coverage to Codecov
+        uses: codecov/codecov-action@v4
+        with:
+          verbose: true
+        env:
+          CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
+      
+      - name: Check package
+        run: dart pub publish --dry-run
 
       - name: Publish package
-        run: dart pub publish --force
+        run: dart pub publish --force --no-interaction
