@@ -1,11 +1,11 @@
 name: widget_drag_and_drop_layer
 description: "This is flutter package it can allow show or hidden floating widget and allo expanded this widget on fullscreen"
 homepage: https://github.com/rendondeveloper/dragAndDropPluging.git
-version: 0.0.4
+version: 0.0.6
 
 environment:
   sdk: '>=3.4.3 <4.0.0'
-  flutter: '3.22.2'
+  flutter: '>=3.22.2'
 
 dependencies:
   flutter:
