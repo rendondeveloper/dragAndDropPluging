@@ -20,6 +20,7 @@ class WidgetDraggableLayerState extends State<WidgetDragAndDropLayer> {
   Offset _offset = Offset.zero;
   final Offset _offsetZero = Offset.zero;
 
+
   @override
   Widget build(BuildContext context) {
     final screenSize = MediaQuery.of(context).size;
